@@ -1,2 +1,24 @@
+# Build artifacts
+bin/
+obj/
+
+# IDE-specific files
+.idea/
+.vscode/
+
+# OS-specific files
+.DS_Store
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+
+# User-specific files
+*.user
+*.lock
+*.log
+
+
 appsettings.json
 appsettings.Development.json
