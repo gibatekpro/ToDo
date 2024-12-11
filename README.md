@@ -1,9 +1,9 @@
 # ToDo
  A simple To-Do backend with APIs, using a local SQL database.
 
-Author: Gibah Anthony
+Author: Anthony Gibah
 
-Organization: Gibatekpro
+Developer: Gibatekpro
 
 
 ***
