@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDo.Models;
 
@@ -10,9 +11,11 @@ using ToDo.Models;
 namespace ToDo.Migrations
 {
     [DbContext(typeof(ToDoContext))]
-    partial class ToDoContextModelSnapshot : ModelSnapshot
+    [Migration("20241210205046_NullableCategory")]
+    partial class NullableCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
@@ -89,10 +92,12 @@ namespace ToDo.Migrations
                             b1.Property<long>("ToDoItemId")
                                 .HasColumnType("INTEGER");
 
-                            b1.Property<decimal>("Latitude")
+                            b1.Property<string>("Latitude")
+                                .IsRequired()
                                 .HasColumnType("TEXT");
 
-                            b1.Property<decimal>("Longitude")
+                            b1.Property<string>("Longitude")
+                                .IsRequired()
                                 .HasColumnType("TEXT");
 
                             b1.HasKey("ToDoItemId");

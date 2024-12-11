@@ -9,7 +9,7 @@ Organization: Gibatekpro
 ***
 
 [Swagger Url](/swagger/index.html)
-
+<br><br>
 ### Packages
 ***
 Entity Framework CLI tool - The command-line interface (CLI) tools for Entity Framework Core. [Documentation](https://learn.microsoft.com/en-us/ef/core/cli/dotnet)
@@ -55,13 +55,20 @@ Entity Framework Design - The Entity Framework Core tools help with design-time 
 dotnet add package Microsoft.EntityFrameworkCore.Design --version 9.0.0
 ```
 
+***
+Auto Mapper - Map models and entities. [Documentation](https://docs.automapper.org/en/stable/)
+```bash
+dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection
+```
 
+
+<br><br>
 ### Build Tools
 
 ***
 Add Entity Framework Migrations
 ```bash
-dotnet ef migrations add InitialCreate --context ToDoContext
+dotnet ef migrations add LocationDecimal --context ToDoContext
 ```
 
 ***
@@ -73,5 +80,5 @@ dotnet ef database update
 ***
 Command to scaffold a controller
 ```bash
-dotnet aspnet-codegenerator controller -name ToDosController -async -api -m ToDoItem -dc ToDoContext -outDir Controllers
+dotnet aspnet-codegenerator controller -name CategoriesController -async -api -m Category -dc ToDoContext -outDir Controllers
 ```

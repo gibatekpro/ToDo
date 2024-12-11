@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDo.Models;
 
@@ -10,9 +11,11 @@ using ToDo.Models;
 namespace ToDo.Migrations
 {
     [DbContext(typeof(ToDoContext))]
-    partial class ToDoContextModelSnapshot : ModelSnapshot
+    [Migration("20241210222057_LocationToString")]
+    partial class LocationToString
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
@@ -52,6 +55,9 @@ namespace ToDo.Migrations
                     b.Property<DateTime?>("DueDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Location")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("Priority")
                         .HasColumnType("INTEGER");
 
@@ -84,28 +90,7 @@ namespace ToDo.Migrations
                         .WithMany()
                         .HasForeignKey("CategoryId");
 
-                    b.OwnsOne("ToDo.Models.LocationItem", "Location", b1 =>
-                        {
-                            b1.Property<long>("ToDoItemId")
-                                .HasColumnType("INTEGER");
-
-                            b1.Property<decimal>("Latitude")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<decimal>("Longitude")
-                                .HasColumnType("TEXT");
-
-                            b1.HasKey("ToDoItemId");
-
-                            b1.ToTable("ToDoItems");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ToDoItemId");
-                        });
-
                     b.Navigation("Category");
-
-                    b.Navigation("Location");
                 });
 
             modelBuilder.Entity("ToDo.Models.Category", b =>

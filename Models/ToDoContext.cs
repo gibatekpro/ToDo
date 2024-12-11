@@ -20,6 +20,7 @@ public class ToDoContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+       
         modelBuilder.Entity<ToDoItem>()
             .OwnsOne(t => t.Location);
     }

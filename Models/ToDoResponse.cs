@@ -1,9 +1,8 @@
-
 namespace ToDo.Models;
 
-public class ToDoItem
+public class ToDoResponse
 {
-    //Foreign Key property
+    //ToDoItem ID
     public long Id { get; set; }
     
     //Todos item's name
@@ -25,4 +24,8 @@ public class ToDoItem
     
     //Due date of item
     public DateTime? DueDate { get; set; }
+    
+    //Weather information
+    public Weather? Weather { get; set; }
+    
 }

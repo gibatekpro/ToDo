@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ToDo.Models;
+using ToDo.Services;
 
 namespace ToDo.Controllers
 {
@@ -14,34 +16,51 @@ namespace ToDo.Controllers
     public class ToDosController : ControllerBase
     {
         private readonly ToDoContext _context;
+
         //ILogger, for logging
         private readonly ILogger _logger;
+        private readonly IMapper _mapper;
+        private readonly IToDoService _toDoService;
 
-        public ToDosController(ToDoContext context, ILogger<ToDosController> logger)
+        public ToDosController(ToDoContext context, ILogger<ToDosController> logger, IMapper mapper,
+            IToDoService toDoService)
         {
             _context = context;
             _logger = logger;
+            _mapper = mapper;
+            _toDoService = toDoService;
         }
-        
+
         // GET: api/ToDos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ToDoItem>>> GetToDoItems()
         {
-            return await _context.ToDoItems.ToListAsync();
+            try
+            {
+                var todoResponses = await _toDoService.FetchToDoList();
+                return Ok(todoResponses);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "An error occurred while fetching ToDo items.");
+                return StatusCode(500, "An error occurred while processing your request.");
+            }
         }
 
         // GET: api/ToDos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ToDoItem>> GetToDoItem(long id)
+        public async Task<ActionResult<ToDoResponse>> GetToDoItem(long id)
         {
-            var toDoItem = await _context.ToDoItems.FindAsync(id);
-
-            if (toDoItem == null)
+            try
             {
-                return NotFound();
+                var todoResponse = await _toDoService.FetchToDoItem(id);
+                return Ok(todoResponse);
             }
-
-            return toDoItem;
+            catch (Exception e)
+            {
+                _logger.LogError(e, "An error occurred while fetching ToDo item.");
+                return StatusCode(500, "An error occurred while processing your request.");
+            }
         }
 
         // PUT: api/ToDos/5
@@ -49,62 +68,76 @@ namespace ToDo.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutToDoItem(long id, ToDoItem toDoItem)
         {
-            if (id != toDoItem.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(toDoItem).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _toDoService.UpdateToDoItem(id, toDoItem);
+                return NoContent();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception e)
             {
-                if (!ToDoItemExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                _logger.LogError(e, "An error occurred while fetching ToDo item.");
+                return StatusCode(500, "An error occurred while processing your request.");
             }
 
-            return NoContent();
         }
 
         // POST: api/ToDos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ToDoItem>> PostToDoItem(ToDoItem toDoItem)
+        public async Task<ActionResult<ToDoResponse>> PostToDoItem(ToDoItem toDoItem)
         {
-            _context.ToDoItems.Add(toDoItem);
-            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetToDoItem", new { id = toDoItem.Id }, toDoItem);
+            try
+            {
+                var toDoResponse = await _toDoService.PostToDoItem(toDoItem);
+                
+                return CreatedAtAction("GetToDoItem", new { id = toDoResponse.Id }, toDoResponse);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "An error occurred while posting the ToDo item.");
+                throw;
+            }
         }
 
         // DELETE: api/ToDos/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteToDoItem(long id)
         {
-            var toDoItem = await _context.ToDoItems.FindAsync(id);
-            if (toDoItem == null)
+            try
             {
-                return NotFound();
+                await _toDoService.DeleteToDoItem(id);
+                return NoContent();
             }
-
-            _context.ToDoItems.Remove(toDoItem);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            catch (KeyNotFoundException e)
+            {
+                return NotFound(e.Message); //Return 404 if the item is not found
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "An error occurred while deleting the ToDo item with ID {Id}.", id);
+                return StatusCode(500, "An error occurred while processing your request.");
+            }
         }
 
-        private bool ToDoItemExists(long id)
+        // GET: api/fetch-store-todos
+        [HttpGet("fetch-store-todos")]
+        public async Task<IActionResult> FetchAndStoreToDos()
         {
-            return _context.ToDoItems.Any(e => e.Id == id);
+            _logger.LogInformation("Fetching and storing ToDos process started.");
+
+            try
+            {
+                await _toDoService.FetchAndStoreToDos();
+                _logger.LogInformation("ToDos fetched and stored successfully.");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "An error occurred while fetching and storing ToDos.");
+                return StatusCode(500, "An error occurred while processing the request.");
+            }
+
+            return Ok("Data fetched and saved successfully.");
         }
     }
 }
