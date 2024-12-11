@@ -7,7 +7,7 @@ Developer: Gibatekpro
 
 
 ***
-Using localhost. Change your url accordingly. 
+Run the code and use the swagger url to view the api documentations. Change your url accordingly. 
 [Swagger Url](http://localhost:5157/swagger/index.html)
 <br><br>
 ### Packages
