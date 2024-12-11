@@ -16,18 +16,14 @@ namespace ToDo.Controllers
     [ApiController]
     public class ToDosController : ControllerBase
     {
-        private readonly ToDoContext _context;
-
         //Author: Anthony Gibah
-        //ILogger, for logging
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
         private readonly IToDoService _toDoService;
 
-        public ToDosController(ToDoContext context, ILogger<ToDosController> logger, IMapper mapper,
+        public ToDosController(ILogger<ToDosController> logger, IMapper mapper,
             IToDoService toDoService)
         {
-            _context = context;
             _logger = logger;
             _mapper = mapper;
             _toDoService = toDoService;
