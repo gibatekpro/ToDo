@@ -82,3 +82,26 @@ Command to scaffold a controller
 ```bash
 dotnet aspnet-codegenerator controller -name CategoriesController -async -api -m Category -dc ToDoContext -outDir Controllers
 ```
+
+<br><br>
+### Relevant Data
+***
+appSettings.json
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "ConnectionLite": "Data Source=ToDoApiStore.db;"
+  },
+  "WeatherApi": {
+    "BaseUrl": "http://api.weatherapi.com/v1/current.json",
+    "ApiKey": "YOUR_API_KEY"
+  }
+}
+```
