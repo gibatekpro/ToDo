@@ -67,7 +67,7 @@ XUnit - For unit tests. [Documentation](https://learn.microsoft.com/en-us/dotnet
 dotnet new xunit -n ToDo.Tests
 ```
 ```bash
-dotnet add ToDo.Tests/ToDo.Tests.csproj reference ToDo.csproj
+dotnet add ToDo.Tests/ToDo.Tests.csproj reference ToDo/ToDo.csproj
 ```
 
 ***
