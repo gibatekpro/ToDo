@@ -19,6 +19,9 @@ obj/
 *.lock
 *.log
 
+# NuGet packages
+packages/
+
 
 appsettings.json
 appsettings.Development.json
