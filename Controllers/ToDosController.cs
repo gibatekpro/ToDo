@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using ToDo.Models;
 using ToDo.Services;
 
+//Author: Anthony Gibah
 namespace ToDo.Controllers
 {
     [Route("api/[controller]")]
@@ -17,6 +18,7 @@ namespace ToDo.Controllers
     {
         private readonly ToDoContext _context;
 
+        //Author: Anthony Gibah
         //ILogger, for logging
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
@@ -31,6 +33,7 @@ namespace ToDo.Controllers
             _toDoService = toDoService;
         }
 
+        //Author: Anthony Gibah
         // GET: api/ToDos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ToDoItem>>> GetToDoItems()
@@ -47,6 +50,7 @@ namespace ToDo.Controllers
             }
         }
 
+        //Author: Anthony Gibah
         // GET: api/ToDos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ToDoResponse>> GetToDoItem(long id)
@@ -63,6 +67,7 @@ namespace ToDo.Controllers
             }
         }
 
+        //Author: Anthony Gibah
         // PUT: api/ToDos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -140,6 +145,7 @@ namespace ToDo.Controllers
             return Ok("Data fetched and saved successfully.");
         }
         
+        //Author: Anthony Gibah
         // GET: api/search
         [HttpGet("search")]
         public async Task<ActionResult<IEnumerable<ToDoResponse>>> SearchToDoItems(string? title, int? priority, DateTime? dueDate)

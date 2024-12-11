@@ -5,12 +5,14 @@ using ToDo.Models;
 
 namespace ToDo.Services;
 
+//Author: Anthony Gibah
 public class WeatherIServiceImpl: IWeatherService
 {
     //Using IOptions ton ensure API Key is not exposed
     private readonly WeatherApiSettings _weatherApiSettings;
     private readonly ILogger _logger; //for logging
 
+    //Author: Anthony Gibah
     public WeatherIServiceImpl(IOptions<WeatherApiSettings> options, ILogger<WeatherIServiceImpl> logger)
     {
         _weatherApiSettings = options.Value;

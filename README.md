@@ -7,8 +7,8 @@ Organization: Gibatekpro
 
 
 ***
-
-[Swagger Url](/swagger/index.html)
+Using localhost. Change your url accordingly. 
+[Swagger Url](http://localhost:5157/swagger/index.html)
 <br><br>
 ### Packages
 ***

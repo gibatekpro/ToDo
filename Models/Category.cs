@@ -1,13 +1,16 @@
 namespace ToDo.Models;
 
+//Author: Anthony Gibah
 public class Category
 {
     //ID for db
     public long Id { get; set; }
     
+    //Author: Anthony Gibah
     //Category's title
     public string Title { get; set; }
     
+    //Author: Anthony Gibah
     //Optional, for parent category
     public long? ParentCategoryId { get; set; }
     public Category? ParentCategory { get; set; }

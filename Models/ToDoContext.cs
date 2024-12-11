@@ -5,6 +5,7 @@ using ToDo.Models;
 
 namespace ToDo.Models;
 
+//Author: Anthony Gibah
 public class ToDoContext : DbContext
 {
     //DB Context for entity framework
@@ -12,12 +13,14 @@ public class ToDoContext : DbContext
     {
     }
     
+    //Author: Anthony Gibah
     //For Creating ToDoItems table
     public DbSet<ToDoItem> ToDoItems { get; set; }
     
     //For Creating Categories table
     public DbSet<Category> Categories { get; set; }
     
+    //Author: Anthony Gibah
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
        

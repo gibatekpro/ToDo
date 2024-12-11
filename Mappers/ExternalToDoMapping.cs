@@ -1,10 +1,12 @@
 using AutoMapper;
 using ToDo.Models;
 
+//Author: Anthony Gibah
 namespace ToDo.Mappers;
 
 public class ExternalToDoMapping: Profile
 {
+    //Author: Anthony Gibah
     public ExternalToDoMapping()
     {
         CreateMap<ExternalToDoItem, ToDoItem>()

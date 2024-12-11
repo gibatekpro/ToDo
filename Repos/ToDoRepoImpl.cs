@@ -4,6 +4,7 @@ using ToDo.Models;
 
 namespace ToDo.Repos;
 
+//Author: Anthony Gibah
 public class ToDoRepoImpl : IToDoRepo
 {
     private readonly ToDoContext _context; //Dependency injection
@@ -15,6 +16,7 @@ public class ToDoRepoImpl : IToDoRepo
         _logger = logger;
     }
 
+    //Author: Anthony Gibah
     //Method Implementation for saving list to db
     public async Task SaveToDoList(List<ToDoItem> todos)
     {
@@ -59,6 +61,7 @@ public class ToDoRepoImpl : IToDoRepo
         }
     }
 
+    //Author: Anthony Gibah
     public async Task UpdateToDoItem(long id, ToDoItem toDoItem)
     {
         _context.Entry(toDoItem).State = EntityState.Modified;
@@ -98,6 +101,7 @@ public class ToDoRepoImpl : IToDoRepo
         }
     }
 
+    //Author: Anthony Gibah
     public async Task<ToDoItem?> GetToDoItemById(long id)
     {
         return await _context.ToDoItems.FindAsync(id);
@@ -140,6 +144,7 @@ public class ToDoRepoImpl : IToDoRepo
         return await query.ToListAsync();
     }
 
+    //Author: Anthony Gibah
     private bool ToDoItemExists(long id)
     {
         return _context.ToDoItems.Any(e => e.Id == id);

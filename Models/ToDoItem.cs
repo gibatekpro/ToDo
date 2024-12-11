@@ -1,6 +1,7 @@
 
 namespace ToDo.Models;
 
+//Author: Anthony Gibah
 public class ToDoItem
 {
     //Foreign Key property
@@ -9,6 +10,7 @@ public class ToDoItem
     //Todos item's name
     public string Todo { get; set; }
     
+    //Author: Anthony Gibah
     //Completed (true or false)
     public bool Completed { get; set; }
     
@@ -23,6 +25,7 @@ public class ToDoItem
     public int Priority { get; set; } = 3;
     public LocationItem? Location { get; set; }
     
+    //Author: Anthony Gibah
     //Due date of item
     public DateTime? DueDate { get; set; }
 }

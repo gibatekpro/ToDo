@@ -1,5 +1,6 @@
 namespace ToDo.Models;
 
+//Author: Anthony Gibah
 public class ToDoResponse
 {
     //ToDoItem ID
@@ -14,6 +15,7 @@ public class ToDoResponse
     //Id of user
     public long UserId { get; set; }
     
+    //Author: Anthony Gibah
     //Category this todos item belongs to
     public long? CategoryId { get; set; }
     public Category? Category { get; set; }
@@ -25,6 +27,7 @@ public class ToDoResponse
     //Due date of item
     public DateTime? DueDate { get; set; }
     
+    //Author: Anthony Gibah
     //Weather information
     public Weather? Weather { get; set; }
     

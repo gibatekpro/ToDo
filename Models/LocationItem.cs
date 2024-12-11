@@ -1,5 +1,6 @@
 namespace ToDo.Models;
 
+//Author: Anthony Gibah
 public class LocationItem
 {
     //Location model
@@ -7,6 +8,7 @@ public class LocationItem
     //Longitude String
     public decimal Longitude { get; set; }
     
+    //Author: Anthony Gibah
     //Latitude String
     public decimal Latitude { get; set; }
 

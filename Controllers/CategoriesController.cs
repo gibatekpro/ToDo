@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ToDo.Models;
 
+//Author: Anthony Gibah
 namespace ToDo.Controllers
 {
     [Route("api/[controller]")]
@@ -20,6 +21,7 @@ namespace ToDo.Controllers
             _context = context;
         }
 
+        //Author: Anthony Gibah
         // GET: api/Categories
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
@@ -27,6 +29,7 @@ namespace ToDo.Controllers
             return await _context.Categories.ToListAsync();
         }
 
+        //Author: Anthony Gibah
         // GET: api/Categories/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Category>> GetCategory(long id)
@@ -41,6 +44,7 @@ namespace ToDo.Controllers
             return category;
         }
 
+        //Author: Anthony Gibah
         // PUT: api/Categories/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -72,6 +76,7 @@ namespace ToDo.Controllers
             return NoContent();
         }
 
+        //Author: Anthony Gibah
         // POST: api/Categories
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -83,6 +88,7 @@ namespace ToDo.Controllers
             return CreatedAtAction("GetCategory", new { id = category.Id }, category);
         }
 
+        //Author: Anthony Gibah
         // DELETE: api/Categories/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(long id)

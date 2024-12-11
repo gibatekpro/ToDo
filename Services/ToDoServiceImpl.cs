@@ -6,6 +6,7 @@ using ToDo.Repos;
 
 namespace ToDo.Services;
 
+//Author: Anthony Gibah
 public class ToDoServiceImpl : IToDoService
 {
     private readonly IToDoRepo _toDoRepo; //Dependency Injection
@@ -13,6 +14,7 @@ public class ToDoServiceImpl : IToDoService
     private readonly ILogger _logger; //Dependency Injection
     private readonly IWeatherService _weatherService; //Dependency Injection
 
+    //Author: Anthony Gibah
     public ToDoServiceImpl(IToDoRepo toDoRepo, IMapper mapper, ILogger<ToDoServiceImpl> logger,
         IWeatherService weatherService)
     {
@@ -22,6 +24,7 @@ public class ToDoServiceImpl : IToDoService
         _weatherService = weatherService;
     }
 
+    //Author: Anthony Gibah
     //Implementation of method for fetching and storing the data
     public async Task FetchAndStoreToDos()
     {
@@ -54,6 +57,7 @@ public class ToDoServiceImpl : IToDoService
         }
     }
 
+    //Author: Anthony Gibah
     public async Task<List<ToDoResponse>> FetchToDoList()
     {
         try
@@ -165,6 +169,7 @@ public class ToDoServiceImpl : IToDoService
         }
     }
 
+    //Author: Anthony Gibah
     public async Task<IEnumerable<ToDoResponse>> SearchToDoItems(string? title, int? priority, DateTime? dueDate)
     {
         try
@@ -213,6 +218,7 @@ public class ToDoServiceImpl : IToDoService
         }
     }
     
+    //Author: Anthony Gibah
     private async Task AddWeatherInfo(ToDoResponse toDoResponse)
     {
         //Fetch weather data if location is provided
