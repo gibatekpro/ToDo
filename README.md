@@ -61,6 +61,27 @@ Auto Mapper - Map models and entities. [Documentation](https://docs.automapper.o
 dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection
 ```
 
+***
+XUnit - For unit tests. [Documentation](https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-dotnet-test)
+```bash
+dotnet new xunit -n ToDo.Tests
+```
+```bash
+dotnet add ToDo.Tests/ToDo.Tests.csproj reference ToDo.csproj
+```
+
+***
+Entity FrameWork InMemory - Allows Entity Framework Core to be used with an in-memory database. [Documentation](https://learn.microsoft.com/en-us/ef/core/providers/in-memory/?tabs=dotnet-core-cli)
+```bash
+dotnet add ToDo.Tests package Microsoft.EntityFrameworkCore.InMemory
+```
+
+***
+Moq - The most popular and friendly mocking library for .NET [Documentation](https://github.com/devlooped/moq)
+```bash
+dotnet add ToDo.Tests package Moq
+```
+
 
 <br><br>
 ### Build Tools
