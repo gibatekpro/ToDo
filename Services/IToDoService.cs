@@ -23,4 +23,7 @@ public interface IToDoService
     
     //Posting Single ToDoItem
     public Task<ToDoResponse> PostToDoItem(ToDoItem toDoItem);
+    
+    //Search by title or by priority or by dueDate
+    public Task<IEnumerable<ToDoResponse>> SearchToDoItems(string? title, int? priority, DateTime? dueDate);
 }

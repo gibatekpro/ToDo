@@ -139,5 +139,21 @@ namespace ToDo.Controllers
 
             return Ok("Data fetched and saved successfully.");
         }
+        
+        // GET: api/search
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<ToDoResponse>>> SearchToDoItems(string? title, int? priority, DateTime? dueDate)
+        {
+            try
+            {
+                var results = await _toDoService.SearchToDoItems(title, priority, dueDate);
+                return Ok(results);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "An error occurred while searching To-Do items.");
+                return StatusCode(500, "An error occurred while processing your request.");
+            }
+        }
     }
 }

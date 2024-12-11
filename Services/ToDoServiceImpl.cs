@@ -165,6 +165,33 @@ public class ToDoServiceImpl : IToDoService
         }
     }
 
+    public async Task<IEnumerable<ToDoResponse>> SearchToDoItems(string? title, int? priority, DateTime? dueDate)
+    {
+        try
+        {
+            
+            var results = await _toDoRepo.SearchToDoItems(title, priority, dueDate);
+
+            //ToDoItems to ToDoResponses
+            var toDoResponses = _mapper.Map<IEnumerable<ToDoResponse>>(results);
+
+            _logger.LogInformation("Checking if ToDo items have location to set weather and temperature.");
+            foreach (var toDo in toDoResponses)
+            {
+                await AddWeatherInfo(toDo);
+            }
+
+            _logger.LogInformation("{Count} ToDo items found and processed.", results.Count());
+
+            return toDoResponses;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while searching ToDo items.");
+            throw;
+        }
+    }
+
     private async Task AddWeatherInfo(ToDoItem toDoItem, ToDoResponse toDoResponse)
     {
         //Fetch weather data if location is provided

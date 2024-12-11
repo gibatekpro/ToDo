@@ -24,4 +24,7 @@ public interface IToDoRepo
     
     //Post Single ToDoItem
     public Task PostToDoItem(ToDoItem toDoItem);
+    
+    //Search Item by Query
+    public Task<IEnumerable<ToDoItem>> SearchToDoItems(string? title, int? priority, DateTime? dueDate);
 }

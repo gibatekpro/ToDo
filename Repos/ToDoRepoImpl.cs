@@ -118,6 +118,28 @@ public class ToDoRepoImpl : IToDoRepo
         }
     }
 
+    public async Task<IEnumerable<ToDoItem>> SearchToDoItems(string? title, int? priority, DateTime? dueDate)
+    {
+        IQueryable<ToDoItem> query = _context.ToDoItems;
+
+        if (!string.IsNullOrEmpty(title))
+        {
+            query = query.Where(todo => todo.Todo.ToLower().Contains(title.ToLower()));
+        }
+
+        if (priority.HasValue)
+        {
+            query = query.Where(todo => todo.Priority == priority.Value);
+        }
+
+        if (dueDate.HasValue)
+        {
+            query = query.Where(todo => todo.DueDate.HasValue && todo.DueDate.Value.Date == dueDate.Value.Date);
+        }
+
+        return await query.ToListAsync();
+    }
+
     private bool ToDoItemExists(long id)
     {
         return _context.ToDoItems.Any(e => e.Id == id);
